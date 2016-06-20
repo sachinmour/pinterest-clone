@@ -1,4 +1,5 @@
 var serverRender = require("../utils/serverRendering");
+var pinHandler = require("../utils/pinHandler");
 var path = require('path');
 
 module.exports = function(app, passport) {
@@ -23,6 +24,22 @@ module.exports = function(app, passport) {
         req.logout();
         res.redirect('/');
     });
+
+    app.get('/getpins', function(req, res) {
+        pinHandler.getAllPins(req, res);
+    });
+
+    app.get('/getmypins', LoggedInAjax, function(req, res) {
+        pinHandler.getUserPins(req, res);
+    });
+
+    app.post('/deletepin', LoggedInAjax, function(req, res) {
+        pinHandler.deletePin(req, res);
+    });
+
+    app.post('/addpin', LoggedInAjax, function(req, res) {
+        pinHandler.addPin(req, res);
+    })
 
     app.get('/*', function(req, res) {
         // serverRender.handleRender(req, res);
