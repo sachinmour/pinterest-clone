@@ -1,13 +1,16 @@
 import React from "react";
 import axios from "axios";
 import { Link } from 'react-router';
+var elem;
+var msnry;
 
 class AllPins extends React.Component {
 
     constructor(props, context) {
         super(props, context);
         this.state = {
-            pinss: []
+            pins: [],
+            msnry: {}
         }
     }
 
@@ -16,7 +19,7 @@ class AllPins extends React.Component {
         axios.get('/getallpins')
             .then(function(response) {
                 _this.setState({
-                    pins: response.data.pins
+                    pins: response.data.pins || []
                 });
             });
     }
@@ -27,16 +30,32 @@ class AllPins extends React.Component {
         e.target.src = '/placeholder.jpg';
     }
 
+    componentDidUpdate() {
+        elem = document.querySelector('#allpins');
+        msnry = new Masonry(elem, {
+            // options
+            itemSelector: '.pin',
+            columnWidth: 200
+        });
+    }
+
+    layout() {
+        msnry.layout();
+    }
+
     render() {
 
         var _this = this;
+
         var pinHtml = _this.state.pins.map(function(pin) {
 
             return (
                 <div className="pin" key={pin._id}>
-                    <img src={book.image} onError={(e) => _this.loadPlaceholder(e)}/>
-                    <p class="subtitle">{pin.title}</p>
-                    <Link to={"/user/" + pin.creator.username}>{"From " + pin.creator.username}</Link>
+                    <img src={pin.src} onError={(e) => _this.loadPlaceholder(e)} onLoad={(e) => _this.layout(e)} />
+                    <div>
+                        <p class="subtitle">{pin.title}</p>
+                        <Link to={"/user/" + pin.creator.username}>{"From " + pin.creator.username}</Link>
+                    </div>
                 </div>
             );
         });

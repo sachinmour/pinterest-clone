@@ -12,6 +12,7 @@ module.exports = {
 
     getAllPins(req, res) {
         Pin.find({}).populate('creator', 'username').exec(function(err, pins) {
+            console.log(pins);
             if (err) throw err;
             res.json({ pins: pins });
         });
