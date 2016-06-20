@@ -37,8 +37,8 @@ class AddPin extends React.Component {
                 src: _this.state.src
             })
             .then(function(response) {
-                if (!response.data.redirect && !response.data.pin) {
-                    console.log('hello');
+                console.log(response.data);
+                if (!response.data.redirect && response.data.pin) {
                     _this.context.router.push('/my');
                 }
             });

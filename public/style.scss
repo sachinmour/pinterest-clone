@@ -116,7 +116,8 @@ div#content {
     justify-content: center;
 }
 
-div#allpins {
+div#allpins,
+div#mypins {
     display: flex;
     max-width: 1024px;
     padding: 0px 20px;

@@ -4,7 +4,7 @@ import { Link } from 'react-router';
 var elem;
 var msnry;
 
-class AllPins extends React.Component {
+class MyPins extends React.Component {
 
     constructor(props, context) {
         super(props, context);
@@ -15,7 +15,7 @@ class AllPins extends React.Component {
 
     componentWillMount() {
         var _this = this;
-        axios.get('/getallpins')
+        axios.get('/getmypins')
             .then(function(response) {
                 _this.setState({
                     pins: response.data.pins || []
@@ -30,7 +30,7 @@ class AllPins extends React.Component {
     }
 
     componentDidUpdate() {
-        elem = document.querySelector('#allpins');
+        elem = document.querySelector('#mypins');
         msnry = new Masonry(elem, {
             // options
             itemSelector: '.pin',
@@ -48,26 +48,19 @@ class AllPins extends React.Component {
 
         var pinHtml = _this.state.pins.map(function(pin) {
 
-            var link;
-            if (_this.props.user.username === pin.creator.username) {
-                link = "/my";
-            } else {
-                link = "/user/" + pin.creator.username;
-            }
-
             return (
                 <div className="pin" key={pin._id}>
                     <img src={pin.src} onError={(e) => _this.loadPlaceholder(e)} onLoad={(e) => _this.layout(e)} />
                     <div>
                         <p class="subtitle">{pin.title}</p>
-                        <Link to={link}>{"From " + pin.creator.username}</Link>
+                        <Link to="/my">{"From " + pin.creator.username}</Link>
                     </div>
                 </div>
             );
         });
 
         return (
-            <div id="allpins">
+            <div id="mypins">
               {pinHtml}
             </div>
         );
@@ -75,4 +68,4 @@ class AllPins extends React.Component {
 
 }
 
-export default AllPins;
+export default MyPins;
