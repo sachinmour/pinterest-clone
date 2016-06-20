@@ -3,11 +3,22 @@ import User from "../models/users.js";
 
 module.exports = {
 
-    getUserPins(req, res) {
+    getMyPins(req, res) {
         Pin.find({ creator: req.user._id }).populate('creator', 'username').exec(function(err, pins) {
             if (err) throw err;
             res.json({ pins: pins });
         });
+    },
+
+    getUserPins(req, res) {
+        User.findOne({ username: req.params.username }, function(err, user) {
+            if (err) throw err;
+            console.log(user);
+            Pin.find({ creator: user._id }).populate('creator', 'username').exec(function(err, pins) {
+                if (err) throw err;
+                res.json({ pins: pins });
+            });
+        })
     },
 
     getAllPins(req, res) {

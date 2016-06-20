@@ -30,7 +30,7 @@ module.exports = function(app, passport) {
     });
 
     app.get('/getmypins', LoggedInAjax, function(req, res) {
-        pinHandler.getUserPins(req, res);
+        pinHandler.getMyPins(req, res);
     });
 
     app.post('/deletepin', LoggedInAjax, function(req, res) {
@@ -40,6 +40,10 @@ module.exports = function(app, passport) {
     app.post('/addpin', LoggedInAjax, function(req, res) {
         pinHandler.addPin(req, res);
     });
+
+    app.get('/getuserpins/:username', function(req, res) {
+        pinHandler.getUserPins(req, res);
+    })
 
     app.get('/*', function(req, res) {
         // serverRender.handleRender(req, res);
