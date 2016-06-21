@@ -33,8 +33,7 @@ class MyPins extends React.Component {
         elem = document.querySelector('#mypins');
         msnry = new Masonry(elem, {
             // options
-            itemSelector: '.pin',
-            columnWidth: 200
+            itemSelector: '.pin'
         });
     }
 
@@ -74,7 +73,7 @@ class MyPins extends React.Component {
                     <div>
                         <p class="subtitle">{pin.title}</p>
                         <Link to="/my">{"From " + pin.creator.username}</Link>
-                        <i className="fa fa-times" onClick={(e) => _this.handleDelete(e)} aria-hidden="true"></i>
+                        <i className="fa fa-times tooltip"  title="Delete" onClick={(e) => _this.handleDelete(e)} aria-hidden="true"></i>
                     </div>
                 </div>
             );

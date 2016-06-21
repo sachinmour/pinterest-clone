@@ -33,8 +33,7 @@ class AllPins extends React.Component {
         elem = document.querySelector('#allpins');
         msnry = new Masonry(elem, {
             // options
-            itemSelector: '.pin',
-            columnWidth: 200
+            itemSelector: '.pin'
         });
     }
 

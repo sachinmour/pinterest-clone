@@ -33,8 +33,7 @@ class UserPins extends React.Component {
         elem = document.querySelector('#userpins');
         msnry = new Masonry(elem, {
             // options
-            itemSelector: '.pin',
-            columnWidth: 200
+            itemSelector: '.pin'
         });
     }
 

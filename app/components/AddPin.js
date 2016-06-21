@@ -48,6 +48,7 @@ class AddPin extends React.Component {
         var _this = this;
 
         return (
+            <div id="addpin">
             <form onSubmit={(e) => this.handleSubmit(e)}>
                 <div className="input">
                     <input type="text" placeholder="Title" value={this.state.title} onChange={(e) => this.handleChange(e)}/>
@@ -59,6 +60,7 @@ class AddPin extends React.Component {
                     <button type='submit'>Add</button>
                 </div>
             </form>
+            </div>
         );
     }
 

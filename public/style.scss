@@ -42,7 +42,7 @@ div#app {
 }
 
 div#top {
-    background-color: $slast;
+    background-color: $mid;
     width: 100%;
     display: flex;
     justify-content: center;
@@ -50,7 +50,6 @@ div#top {
         background-color: $mid;
         width: 100%;
         height: 60px;
-        max-width: 1024px;
         padding: 0px 20px;
         justify-content: space-between;
         display: flex;
@@ -74,33 +73,6 @@ div#top {
     }
 }
 
-div#body_home {
-    background-color: $first;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    div {
-        max-width: 1024px;
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        img {
-            width: 100%;
-        }
-        p {
-            font-size: 3rem;
-            @include tablet {
-                font-size: 2.5rem;
-            }
-            @include mobile {
-                font-size: 1.8rem;
-            }
-        }
-    }
-}
-
 div#contact {
     display: flex;
     justify-content: center;
@@ -119,10 +91,9 @@ div#content {
 div#allpins,
 div#userpins,
 div#mypins {
-    display: flex;
-    max-width: 1024px;
     padding: 0px 20px;
     width: 100%;
+    display: flex;
     .pin {
         background-color: white;
         width: 200px;
@@ -136,6 +107,7 @@ div#mypins {
             display: flex;
             flex-direction: column;
             width: 100%;
+            position: relative;
         }
         p,
         a {
@@ -155,5 +127,73 @@ div#mypins {
             width: 100%;
             min-height: 100%;
         }
+        i {
+            position: absolute;
+            right: 10px;
+            bottom: 8px;
+            cursor: pointer;
+        }
+    }
+}
+
+div#addpin {
+    display: flex;
+    width: 100%;
+    width: 100%;
+    padding: 20px;
+}
+
+form {
+    display: flex;
+    width: 100%;
+    div.input {
+        width: 40%;
+        margin: 5px;
+        input {
+            width: 100%;
+            border-radius: 5px;
+            padding: 8px;
+            border: 1px solid darken(white, 30);
+        }
+    }
+    div#add {
+        width: 20%;
+        margin: 5px;
+        button {
+            width: 100%;
+            border-radius: 5px;
+            padding: 8px;
+            border: 1px solid lighten($mid, 10);
+            background-color: $mid;
+            color: white;
+            cursor: pointer;
+        }
+    }
+    @include mobile {
+        flex-direction: column;
+        div.input,
+        div#add {
+            width: 100%;
+        }
+    }
+}
+
+div#allpins,
+div#userpins,
+div#mypins,
+div#header,
+div#addpin {
+    max-width: 1086px;
+    @media (max-width: 1086px) {
+        max-width: 880px;
+    }
+    @media (max-width: 880px) {
+        max-width: 674px;
+    }
+    @media (max-width: 674px) {
+        max-width: 468px;
+    }
+    @media (max-width: 468px) {
+        max-width: 260px;
     }
 }
