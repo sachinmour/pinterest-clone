@@ -42,6 +42,26 @@ class MyPins extends React.Component {
         msnry.layout();
     }
 
+    handleDelete(e) {
+        e.preventDefault();
+        var _this = this;
+        var pin_id = e.target.parentElement.parentElement.getAttribute('data-id');
+        var oldPins = this.state.pins;
+        var newPins = oldPins.filter(function(pin) {
+            pin._id !== pin_id;
+        });
+        this.setState({
+            pins: newPins
+        })
+        axios.post('/deletepin', { id: pin_id }).then(function(response) {
+            if (!response.data.pinRemoved) {
+                _this.setState({
+                    pins: oldPins
+                });
+            }
+        });
+    }
+
     render() {
 
         var _this = this;
@@ -49,11 +69,12 @@ class MyPins extends React.Component {
         var pinHtml = _this.state.pins.map(function(pin) {
 
             return (
-                <div className="pin" key={pin._id}>
+                <div className="pin" key={pin._id} data-id={pin._id}>
                     <img src={pin.src} onError={(e) => _this.loadPlaceholder(e)} onLoad={(e) => _this.layout(e)} />
                     <div>
                         <p class="subtitle">{pin.title}</p>
                         <Link to="/my">{"From " + pin.creator.username}</Link>
+                        <i className="fa fa-times" onClick={(e) => _this.handleDelete(e)} aria-hidden="true"></i>
                     </div>
                 </div>
             );

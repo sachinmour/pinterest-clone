@@ -40,13 +40,14 @@ module.exports = {
     },
 
     deletePin(req, res) {
-        Pin.find({ _id: req.body.id }, function(err, pin) {
+        Pin.findOne({ _id: req.body.id }, function(err, pin) {
             if (err) throw err;
             if (pin.creator.equals(req.user._id)) {
                 pin.remove();
                 res.json({ pinRemoved: true });
+            } else {
+                res.json({ pinRemoved: false });
             }
-            res.json({ pinRemoved: false });
-        })
+        });
     }
 }
