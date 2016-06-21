@@ -43,7 +43,11 @@ module.exports = function(app, passport) {
 
     app.get('/getuserpins/:username', function(req, res) {
         pinHandler.getUserPins(req, res);
-    })
+    });
+
+    app.get(['/my', '/add'], isLoggedIn, function(req, res) {
+        res.sendFile(path.join(__dirname, '../../public/index2.html'));
+    });
 
     app.get('/*', function(req, res) {
         // serverRender.handleRender(req, res);

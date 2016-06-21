@@ -1,6 +1,6 @@
 require('babel-core/register');
 var path = require('path');
-// require("dotenv").config();
+require("dotenv").config();
 var express = require('express'),
     server_routes = require("./app/server_routes/routes"),
     mongoose = require("mongoose"),
